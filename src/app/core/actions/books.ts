@@ -37,8 +37,8 @@ export const googleBooksRetrieveSuccess = (payload: Book): GoogleBooksRetrieveSu
     payload: payload
   };
 };
-// TODO add payload type error
-export const googleBooksRetrieveError = (payload: any): GoogleBooksRetrieveError => {
+
+export const googleBooksRetrieveError = (payload: string): GoogleBooksRetrieveError => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_RETRIEVE_ERROR,
     payload: payload
@@ -57,4 +57,5 @@ export type BooksAction =
   | GoogleBooksQueryComplete
   | GoogleBooksQueryError
   | GoogleBooksRetrieve
+  | GoogleBooksRetrieveError
   | GoogleBooksRetrieveSuccess;
