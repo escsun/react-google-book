@@ -1,9 +1,14 @@
 import * as React from "react";
 
+import BookSearchPage from "../../containers/BookSearchPage";
+import BooksPage from "../../containers/BooksPage";
+
 const Home = (): JSX.Element => {
   return (
-    <div className="Home">
-      <h1>Template for file Home.tsx</h1>
+    <div className="_home">
+      <h1>Template for Home component.</h1>
+      <BookSearchPage />
+      <BooksPage />
     </div>
   );
 };
