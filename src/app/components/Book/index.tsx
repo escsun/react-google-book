@@ -11,7 +11,7 @@ const Book = (props: Props) => {
   return (
     <div className="_book">
       <h1>{book.volumeInfo.title}</h1>
-      <p>{book.volumeInfo.description}</p>
+      <p dangerouslySetInnerHTML={{__html: props.book.volumeInfo.description}}/>
     </div>
   );
 };
