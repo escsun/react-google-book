@@ -1,7 +1,7 @@
 import { BooksConstants } from "../constants";
 
-import Book from "../models/book.model";
-import Books from "../models/books.model";
+import IBook from "../models/book.model";
+import IBooks from "../models/books.model";
 
 interface GoogleBooksQuery {
   type: BooksConstants.GOOGLE_BOOKS_QUERY;
@@ -10,7 +10,7 @@ interface GoogleBooksQuery {
 
 interface GoogleBooksQueryComplete {
   type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE;
-  payload: Books;
+  payload: IBooks;
 }
 
 interface GoogleBooksQueryError {
@@ -24,7 +24,7 @@ interface GoogleBooksRetrieve {
 }
 interface GoogleBooksRetrieveSuccess {
   type: BooksConstants.GOOGLE_BOOKS_RETRIEVE_SUCCESS;
-  payload: Book;
+  payload: IBook;
 }
 
 interface GoogleBooksRetrieveError {
@@ -39,7 +39,7 @@ export const googleBooksQuery = (payload: string): GoogleBooksQuery => {
   };
 };
 
-export const googleBooksQueryComplete = (payload: Books): GoogleBooksQueryComplete => {
+export const googleBooksQueryComplete = (payload: IBooks): GoogleBooksQueryComplete => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE,
     payload: payload
@@ -53,7 +53,7 @@ export const googleBooksQueryError = (payload: string): GoogleBooksQueryError =>
   };
 };
 
-export const googleBooksRetrieveSuccess = (payload: Book): GoogleBooksRetrieveSuccess => {
+export const googleBooksRetrieveSuccess = (payload: IBook): GoogleBooksRetrieveSuccess => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_RETRIEVE_SUCCESS,
     payload: payload

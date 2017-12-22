@@ -1,12 +1,12 @@
 import { BooksAction } from "../actions";
 import { BooksConstants } from "../constants";
 
-import Book from "../models/book.model";
-import Books from "../models/books.model";
+import IBook from "../models/book.model";
+import IBooks from "../models/books.model";
 
 export interface BooksState {
-  books: Books;
-  bookById: Book;
+  books: IBooks;
+  bookById: IBook;
   errorBookLoading: string;
 }
 
@@ -25,7 +25,7 @@ export const booksReducer = (state = initialState, action: BooksAction) => {
     case BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE:
       return {...state, books: action.payload};
     // case BooksConstants.GOOGLE_BOOKS_QUERY_ERROR:
-    //   return state
+    //   return state;
     default:
       return state;
   }
