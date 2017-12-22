@@ -5,14 +5,24 @@ import {
 } from "redux-saga/effects";
 import {
   BooksAction,
+  googleBooksQueryComplete,
+  googleBooksQueryError,
   googleBooksRetrieveError,
   googleBooksRetrieveSuccess
 } from "../actions";
-import { retrieveGoogleBook } from "../api/books";
+import {
+  fetchGoogleBooksByQuery,
+  retrieveGoogleBook
+} from "../api/books";
 import { BooksConstants } from "../constants";
 
-export function* fetchGoogleBooksByQuerySaga() {
-  return null;
+export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
+  try {
+    const search = yield call(fetchGoogleBooksByQuery, action.payload);
+    yield put(googleBooksQueryComplete(search));
+  } catch (error) {
+    yield put(googleBooksQueryError(error));
+  }
 }
 
 export function* retrieveGoogleBookSaga(action: BooksAction) {
@@ -21,6 +31,13 @@ export function* retrieveGoogleBookSaga(action: BooksAction) {
     yield put(googleBooksRetrieveSuccess(book));
   } catch (error) {
     yield put(googleBooksRetrieveError(error));
+  }
+}
+
+export function* watchGoogleBooksByQuery() {
+  while (true) {
+    const search = yield take(BooksConstants.GOOGLE_BOOKS_QUERY);
+    yield call(fetchGoogleBooksByQuerySaga, search);
   }
 }
 
