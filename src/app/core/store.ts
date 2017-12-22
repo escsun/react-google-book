@@ -9,6 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import { IHotModule } from "./models/hot-module.model";
 import rootReducer from "./reducers";
+import rootSaga from "./sagas";
 
 const history = createHistory();
 const routerMiddleware = createRouterMiddleware(history);
@@ -27,6 +28,8 @@ const configureStore = (initialState = {}) => {
     initialState,
     composeWithDevTools(applyMiddleware(...middlewares))
   );
+
+  sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
     module.hot.accept("./reducers", () => {
