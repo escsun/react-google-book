@@ -1,4 +1,4 @@
-interface Book {
+interface IBook {
   id: string;
   volumeInfo: {
     title: string;
@@ -16,4 +16,4 @@ interface Book {
   };
 }
 
-export default Book;
+export default IBook;

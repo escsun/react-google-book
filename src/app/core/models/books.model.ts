@@ -1,9 +1,9 @@
 import Book from "./book.model";
 
-interface Books {
+interface IBooks {
   kind: string;
   totalItems: number;
   items: Book[];
 }
 
-export default Books;
+export default IBooks;
