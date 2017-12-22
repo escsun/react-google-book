@@ -1,0 +1,10 @@
+# IDE settings
+/.idea
+*.sublime*
+# dependencies
+/node_modules
+# build
+/dist
+# Logs
+yarn-error.log*
+npm-error.log*
