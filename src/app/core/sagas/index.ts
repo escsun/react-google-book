@@ -1,8 +1,12 @@
 import { fork } from "redux-saga/effects";
-import { watchRetrieveGoogleBook } from "./books";
+import {
+  watchGoogleBooksByQuery,
+  watchRetrieveGoogleBook
+} from "./books";
 
 export default function* rootSaga() {
   yield [
-    fork(watchRetrieveGoogleBook)
+    fork(watchRetrieveGoogleBook),
+    fork(watchGoogleBooksByQuery)
   ];
 }
