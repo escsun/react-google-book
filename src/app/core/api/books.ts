@@ -5,8 +5,13 @@ import axios, {
 
 import { ApiEndpointUrl } from "../constants";
 
-export const fetchGoogleBooksByQuery = () => {
-  return null;
+export const fetchGoogleBooksByQuery = (book: string) => {
+  return axios.get(ApiEndpointUrl.GOOGLE_BOOKS_QUERY + book)
+    .then((response: AxiosResponse) => response.data)
+    .catch((error: AxiosError) => {
+      console.log(error);
+      throw error;
+    });
 };
 
 export const retrieveGoogleBook = (volumeId: string) => {
