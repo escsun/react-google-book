@@ -11,7 +11,7 @@ const App = (): JSX.Element => {
   return (
     <Switch>
       <Route exact={true} path="/" component={Home}/>
-      <Route path="/book/:id" component={BookPage}/>
+      <Route path="/book/:volumeId" component={BookPage}/>
     </Switch>
   );
 };
