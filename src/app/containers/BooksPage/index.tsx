@@ -1,22 +1,20 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import Book from "../../components/Book";
-import BookModel from "../../core/models/book.model";
-import Books from "../../core/models/books.model";
+import IBooks from "../../core/models/books.model";
 import { RootState } from "../../core/reducers";
 import { getBooks } from "../../core/selectors";
+import Books from "../../components/Books";
 
 interface StateProps {
-  books: Books;
+  books: IBooks;
 }
 
 class BooksPage extends React.PureComponent<StateProps, {}> {
 
   render() {
+    const {books} = this.props;
     return (
-      <div>
-        {this.props.books && this.props.books.items.map((book: BookModel) => <Book book={book} key={book.id}/>)}
-      </div>
+      <Books books={books}/>
     );
   }
 }
