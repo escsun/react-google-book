@@ -6,7 +6,7 @@ interface Props {
   book: BookModel;
 }
 
-const Book = (props: Props) => {
+const Book = (props: Props): JSX.Element => {
   const {book} = props;
   return (
     <div className="_book">
