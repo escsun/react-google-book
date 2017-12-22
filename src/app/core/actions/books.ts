@@ -1,6 +1,7 @@
 import { BooksConstants } from "../constants";
 
 import Book from "../models/book.model";
+import Books from "../models/books.model";
 
 interface GoogleBooksQuery {
   type: BooksConstants.GOOGLE_BOOKS_QUERY;
@@ -9,7 +10,7 @@ interface GoogleBooksQuery {
 
 interface GoogleBooksQueryComplete {
   type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE;
-  payload: Book[];
+  payload: Books;
 }
 
 interface GoogleBooksQueryError {
@@ -38,7 +39,7 @@ export const googleBooksQuery = (payload: string): GoogleBooksQuery => {
   };
 };
 
-export const googleBooksQueryComplete = (payload: Book[]): GoogleBooksQueryComplete => {
+export const googleBooksQueryComplete = (payload: Books): GoogleBooksQueryComplete => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE,
     payload: payload
