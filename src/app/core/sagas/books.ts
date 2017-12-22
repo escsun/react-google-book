@@ -1,7 +1,9 @@
+import { delay } from "redux-saga";
 import {
   call,
   put,
-  take
+  take,
+  takeLatest
 } from "redux-saga/effects";
 import {
   BooksAction,
@@ -18,11 +20,16 @@ import { BooksConstants } from "../constants";
 
 export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
   try {
+    yield call(delay, 500);
     const search = yield call(fetchGoogleBooksByQuery, action.payload);
     yield put(googleBooksQueryComplete(search));
   } catch (error) {
     yield put(googleBooksQueryError(error));
   }
+}
+
+export function* watchLatestGoogleBooksByQuerySaga() {
+  yield takeLatest(BooksConstants.GOOGLE_BOOKS_QUERY, fetchGoogleBooksByQuerySaga);
 }
 
 export function* retrieveGoogleBookSaga(action: BooksAction) {
@@ -37,7 +44,7 @@ export function* retrieveGoogleBookSaga(action: BooksAction) {
 export function* watchGoogleBooksByQuery() {
   while (true) {
     const search = yield take(BooksConstants.GOOGLE_BOOKS_QUERY);
-    yield call(fetchGoogleBooksByQuerySaga, search);
+    yield call(watchLatestGoogleBooksByQuerySaga, search);
   }
 }
 
