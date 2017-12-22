@@ -31,6 +31,27 @@ interface GoogleBooksRetrieveError {
   payload: string;
 }
 
+export const googleBooksQuery = (payload: string): GoogleBooksQuery => {
+  return {
+    type: BooksConstants.GOOGLE_BOOKS_QUERY,
+    payload: payload
+  };
+};
+
+export const googleBooksQueryComplete = (payload: Book[]): GoogleBooksQueryComplete => {
+  return {
+    type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE,
+    payload: payload
+  };
+};
+
+export const googleBooksQueryError = (payload: string): GoogleBooksQueryError => {
+  return {
+    type: BooksConstants.GOOGLE_BOOKS_QUERY_ERROR,
+    payload: payload
+  };
+};
+
 export const googleBooksRetrieveSuccess = (payload: Book): GoogleBooksRetrieveSuccess => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_RETRIEVE_SUCCESS,
