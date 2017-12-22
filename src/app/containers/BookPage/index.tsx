@@ -1,20 +1,27 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
+  RouteComponentProps,
+  withRouter
+} from "react-router-dom";
+import {
   bindActionCreators,
   Dispatch
 } from "redux";
-
 import Loader from "../../common/Loader";
 import Book from "../../components/Book";
-import BookModel from "../../core/models/book.model";
 
+import BookModel from "../../core/models/book.model";
 import { RootState } from "../../core/reducers";
 import { googleBooksRetrieve } from "../../core/actions";
-import { getBookById } from "../../core/selectors";
+import {
+  getBookById,
+  getErrorBookLoading,
+} from "../../core/selectors";
 
 interface StateProps {
   book: BookModel;
+  errorBookLoading: string;
 }
 
 interface DispatchProps {
@@ -23,22 +30,39 @@ interface DispatchProps {
   };
 }
 
-class BookPage extends React.PureComponent<StateProps & DispatchProps, {}> {
+interface RouteProps {
+  volumeId: string;
+}
+
+class BookPage extends React.PureComponent<StateProps & DispatchProps & RouteComponentProps<RouteProps>, {}> {
 
   componentDidMount() {
-    // setTimeout(() =>  this.props.actions.googleBooksRetrieve("vHlTOVTKHeUC"), 1000);
-    // TODO update URI
-    this.props.actions.googleBooksRetrieve("vHlTOVTKHeUC");
+    const {volumeId} = this.props.match.params;
+    this.props.actions.googleBooksRetrieve(volumeId);
+  }
+
+  renderBook() {
+    return <Book book={this.props.book} />;
+  }
+
+  renderErrorLoading() {
+    return (
+      <div>{this.props.errorBookLoading}</div>
+    );
   }
 
   render() {
-    return this.props.book ? <Book book={this.props.book}/> : <Loader/>;
+    if (!this.props.book && !this.props.errorBookLoading) {
+      return <Loader/>;
+    }
+    return this.props.book ? this.renderBook() : this.renderErrorLoading();
   }
 }
 
 const mapStateToProps = (state: RootState): StateProps => {
   return {
-    book: getBookById(state)
+    book: getBookById(state),
+    errorBookLoading: getErrorBookLoading(state)
   };
 };
 
@@ -46,4 +70,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
   actions: bindActionCreators({googleBooksRetrieve}, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookPage));
