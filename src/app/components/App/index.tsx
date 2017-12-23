@@ -6,12 +6,15 @@ import {
 
 import Home from "../Home";
 import BookPage from "../../containers/BookPage";
+import Layout from "../Layout";
 
 const App = (): JSX.Element => {
   return (
     <Switch>
-      <Route exact={true} path="/" component={Home}/>
-      <Route path="/book/:volumeId" component={BookPage}/>
+      <Layout>
+        <Route exact={true} path="/" component={Home}/>
+        <Route path="/book/:volumeId" component={BookPage}/>
+      </Layout>
     </Switch>
   );
 };
