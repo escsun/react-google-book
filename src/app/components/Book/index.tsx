@@ -1,42 +1,55 @@
 import * as React from "react";
-
-import IBook from "../../core/models/book.model";
+import { Link } from "react-router-dom";
 
 import "./index.scss";
 
+import {
+  createMarkup,
+  createMarkupShorter
+} from "../../utils/markup";
+
+import IBook from "../../core/models/book.model";
+
 interface Props {
   book: IBook;
-  single?: boolean;
+  fullVersion?: boolean;
 }
 
-const createMarkup = (html: string) => {
-  return {
-    __html: html
-  };
-};
-
-const Book = (props: Props): JSX.Element => {
-  const {book} = props;
-  const {title, subtitle, authors, description} = book.volumeInfo;
-  const {thumbnail, smallThumbnail} = book.volumeInfo.imageLinks;
-  const desc = props.single ? createMarkup(description) : createMarkup(description.substring(0, 150) + "...");
-  return (
-    <div className="_book">
-      <div className="container-book">
-        <h1 className="title">{title}</h1>
-        <h2 className="subtitle">{subtitle}</h2>
-        <div className="container">
-          <img className="image" src={smallThumbnail}/>
-          <div>
-            <ul>
-              {authors.map((author: string, i: number) => <li key={i}>{author}</li>)}
-            </ul>
-          </div>
+class Book extends React.Component<Props, {}> {
+  render() {
+    return (
+      <div className="_book">
+        <div className="container-book">
+          <h1 className="title">{this.props.book.volumeInfo.title}</h1>
+          {this.props.book.volumeInfo.subtitle && (
+            <h2 className="subtitle">{this.props.book.volumeInfo.subtitle}</h2>
+          )}
+          {this.props.book.volumeInfo.imageLinks && this.props.book.volumeInfo.imageLinks.thumbnail && (
+            <img
+              className="image"
+              src={this.props.book.volumeInfo.imageLinks.thumbnail}
+              alt={this.props.book.volumeInfo.title}
+            />
+          )}
+          {this.props.book.volumeInfo.description && (
+            <p
+              className="description"
+              dangerouslySetInnerHTML={
+                this.props.fullVersion
+                  ? createMarkup(this.props.book.volumeInfo.description)
+                  : createMarkupShorter(this.props.book.volumeInfo.description, 150)
+              }
+            />
+          )}
+          {this.props.fullVersion ? "" : (
+            <button className="button">
+              <Link to={"/book/" + this.props.book.id} className="link">More info</Link>
+            </button>
+          )}
         </div>
-        <p className="description" dangerouslySetInnerHTML={desc}/>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Book;
