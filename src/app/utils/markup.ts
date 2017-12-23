@@ -6,6 +6,6 @@ export const createMarkup = (html: string) => {
 
 export const createMarkupShorter = (html: string, truncateTo: number) => {
   return {
-    __html: html.substring(0, truncateTo)
+    __html: html.substring(0, truncateTo) + "..."
   };
 };
