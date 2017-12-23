@@ -1,0 +1,56 @@
+._book {
+  margin: 0.5rem auto;
+  background-color: #fff;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  transition: 0.5s all ease-in-out;
+
+  &:hover {
+    border: 1px solid #767676;
+  }
+
+  > .container-book {
+    padding: 30px;
+
+    > .title {
+      text-align: center;
+    }
+
+    > ._subtitle {
+      text-align: center;
+    }
+
+    > .description {
+      text-align: justify;
+    }
+
+    .container {
+      display: flex;
+
+      > .image {
+        width: 128px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  ._book {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  ._book {
+    flex: 0 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem)
+  }
+}
+
+@media screen and (min-width: 992px) {
+  ._book {
+    flex: 0 1 calc(33.3% - 1rem);
+    max-width: calc(33.3% - 1rem);
+  }
+}
