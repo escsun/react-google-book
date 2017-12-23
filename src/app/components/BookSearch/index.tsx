@@ -9,7 +9,7 @@ interface Props {
 const BooksSearch = (props: Props) => {
   return (
     <div className="_books-search">
-      <input onChange={props.handleChange} id="search" name="search" className="input" placeholder="Search for a book"/>
+      <input onInput={props.handleChange} onChange={props.handleChange} id="search" name="search" className="input" placeholder="Search for a book"/>
     </div>
   );
 };
