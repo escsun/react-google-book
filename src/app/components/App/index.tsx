@@ -4,18 +4,23 @@ import {
   Route
 } from "react-router-dom";
 
+import NotFound from "../../common/NotFound";
 import Home from "../Home";
-import BookPage from "../../containers/BookPage";
 import Layout from "../Layout";
+
+import BookPage from "../../containers/BookPage";
 
 const App = (): JSX.Element => {
   return (
-    <Switch>
+    <div>
       <Layout>
-        <Route exact={true} path="/" component={Home}/>
-        <Route path="/book/:volumeId" component={BookPage}/>
+        <Switch>
+          <Route exact={true} path="/" component={Home}/>
+          <Route path="/book/:volumeId" component={BookPage}/>
+          <Route component={NotFound}/>
+        </Switch>
       </Layout>
-    </Switch>
+    </div>
   );
 };
 
