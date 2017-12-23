@@ -1,3 +1,6 @@
+import {
+  push,
+} from "react-router-redux";
 import { delay } from "redux-saga";
 import {
   call,
@@ -23,6 +26,7 @@ export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
     yield call(delay, 500);
     const search = yield call(fetchGoogleBooksByQuery, action.payload);
     yield put(googleBooksQueryComplete(search));
+    yield put(push("/"));
   } catch (error) {
     yield put(googleBooksQueryError(error));
   }
