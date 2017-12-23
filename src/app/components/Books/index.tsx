@@ -15,7 +15,12 @@ const Books = (props: Props): JSX.Element => {
   const {books} = props;
   return (
     <div className="_books">
-      {books && books.items.map((book: IBook) => <Book book={book} key={book.id}/>)}
+      {
+        books &&
+        books.totalItems > 0
+          ? books.items.length > 0 && books.items.map((book: IBook) => <Book book={book} key={book.id}/>)
+          : <p>books not found</p>
+      }
     </div>
   );
 };
