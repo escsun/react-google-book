@@ -42,9 +42,7 @@ class Book extends React.Component<Props, {}> {
             />
           )}
           {this.props.fullVersion ? "" : (
-            <button className="button">
-              <Link to={"/book/" + this.props.book.id} className="link">More info</Link>
-            </button>
+            <Link to={"/book/" + this.props.book.id} className="link" role="button">More info</Link>
           )}
         </div>
       </div>

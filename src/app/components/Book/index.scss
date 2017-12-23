@@ -30,24 +30,20 @@
       min-height: 1vh;
       margin: 0 auto;
     }
-    > .button {
-      padding: 0;
+    > .link {
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      color: white;
+      font-weight: 700;
       margin-top: auto;
       outline: 0;
       border: 0;
       background-color: orange;
-      > .link {
-        text-decoration: none;
-        display: block;
-        height: 100%;
-        width: 100%;
-        padding: 10px;
-        color: white;
-        font-weight: 700;
+      text-align: center;
 
-        &:active, &:focus, &:hover, &:visited {
-          color: white;
-        }
+      &:active, &:focus, &:hover, &:visited {
+        color: white;
       }
     }
   }
