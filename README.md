@@ -1,6 +1,11 @@
-# Starter kit for React, Redux, Router, TypeScript, TsLint, Sass and Webpack (with Hot Module Replacment (HMR)):
+# React Google Book:
+* This is an application for use Google Book API
+* In this project uses react, redux, typescript, axios and sagas 
 
-Minimal starter kit for react with typescript, router and redux.
+![Screenshot](https://github.com/escsun/react-google-book/blob/master/react-google.png)
+
+## Deployed to heroku
+### https://react-google-book.herokuapp.com/
 
 ## Installation
 1. Clone/download repo
@@ -8,9 +13,9 @@ Minimal starter kit for react with typescript, router and redux.
 
 ## Usage
 `yarn start`
-* Start the app with HMR
+* Start the app
 * The app will be served at `http://localhost:3000` 
 
 ## Building for production
 `yarn build`
-* Building the app without HMR
+* Building the app
