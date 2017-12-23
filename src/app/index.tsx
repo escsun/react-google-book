@@ -14,11 +14,13 @@ import "./index.scss";
 
 import App from "./components/App";
 
+const history = createHistory();
+
 const render = (Component: React.ComponentType) => {
   ReactDOM.render(
     <AppContainer>
-      <Provider store={configureStore()}>
-        <ConnectedRouter history={createHistory()}>
+      <Provider store={configureStore(history)}>
+        <ConnectedRouter history={history}>
           <Component/>
         </ConnectedRouter>
       </Provider>
