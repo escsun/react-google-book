@@ -27,6 +27,9 @@
     }
     > .image {
       display: block;
+      width: auto;
+      height: auto;
+      align-self: center;
       min-height: 1vh;
       margin: 0 auto;
     }
