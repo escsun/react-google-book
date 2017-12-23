@@ -42,7 +42,7 @@ class BookPage extends React.PureComponent<StateProps & DispatchProps & RouteCom
   }
 
   renderBook() {
-    return <Book book={this.props.book} single={true} />;
+    return <Book book={this.props.book} fullVersion={true} />;
   }
 
   renderErrorLoading() {
