@@ -6,7 +6,7 @@
   ],
   "jsRules": {},
   "rules": {
-    "jsx-wrap-multiline": false,
+    "jsx-wrap-multiline": true,
     "object-literal-sort-keys": false,
     "no-submodule-imports": false,
     "interface-name": false,
@@ -20,7 +20,8 @@
     "prefer-const": false,
     "object-literal-shorthand": false,
     "no-shadowed-variable": false,
-    "ignore-bound-class-methods": false
+    "ignore-bound-class-methods": false,
+    "jsx-no-multiline-js": false
   },
   "rulesDirectory": []
 }
