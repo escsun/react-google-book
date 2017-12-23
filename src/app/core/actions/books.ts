@@ -32,6 +32,10 @@ interface GoogleBooksRetrieveError {
   payload: string;
 }
 
+interface GoogleBooksRetrieveClean {
+  type: BooksConstants.GOOGLE_BOOKS_RETRIEVE_CLEAN;
+}
+
 export const googleBooksQuery = (payload: string): GoogleBooksQuery => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY,
@@ -71,6 +75,12 @@ export const googleBooksRetrieve = (payload: string): GoogleBooksRetrieve => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_RETRIEVE,
     payload: payload
+  };
+};
+
+export const googleBooksRetrieveClean = (): GoogleBooksRetrieveClean => {
+  return {
+    type: BooksConstants.GOOGLE_BOOKS_RETRIEVE_CLEAN
   };
 };
 

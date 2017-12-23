@@ -13,7 +13,10 @@ import Book from "../../components/Book";
 
 import BookModel from "../../core/models/book.model";
 import { RootState } from "../../core/reducers";
-import { googleBooksRetrieve } from "../../core/actions";
+import {
+  googleBooksRetrieve,
+  googleBooksRetrieveClean
+} from "../../core/actions";
 import {
   getBookById,
   getErrorBookLoading,
@@ -27,6 +30,7 @@ interface StateProps {
 interface DispatchProps {
   actions: {
     googleBooksRetrieve: typeof googleBooksRetrieve;
+    googleBooksRetrieveClean: typeof googleBooksRetrieveClean;
   };
 }
 
@@ -39,6 +43,10 @@ class BookPage extends React.PureComponent<StateProps & DispatchProps & RouteCom
   componentDidMount() {
     const {volumeId} = this.props.match.params;
     this.props.actions.googleBooksRetrieve(volumeId);
+  }
+
+  componentWillUnmount() {
+    this.props.actions.googleBooksRetrieveClean();
   }
 
   renderBook() {
@@ -67,7 +75,7 @@ const mapStateToProps = (state: RootState): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
-  actions: bindActionCreators({googleBooksRetrieve}, dispatch)
+  actions: bindActionCreators({googleBooksRetrieve, googleBooksRetrieveClean}, dispatch)
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookPage));

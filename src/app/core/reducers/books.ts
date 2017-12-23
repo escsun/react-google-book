@@ -1,3 +1,4 @@
+import { Action } from "redux";
 import { BooksAction } from "../actions";
 import { BooksConstants } from "../constants";
 
@@ -13,10 +14,10 @@ export interface BooksState {
 const initialState: BooksState = {
   books: null,
   bookById: null,
-  errorBookLoading: null
+  errorBookLoading: null,
 };
 
-export const booksReducer = (state = initialState, action: BooksAction) => {
+export const booksReducer = (state = initialState, action: BooksAction & Action) => {
   switch (action.type) {
     case BooksConstants.GOOGLE_BOOKS_RETRIEVE_SUCCESS:
       return {...state, bookById: action.payload};
@@ -24,6 +25,8 @@ export const booksReducer = (state = initialState, action: BooksAction) => {
       return {...state, errorBookLoading: action.payload};
     case BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE:
       return {...state, books: action.payload};
+    case BooksConstants.GOOGLE_BOOKS_RETRIEVE_CLEAN:
+      return {...state, bookById: null};
     // case BooksConstants.GOOGLE_BOOKS_QUERY_ERROR:
     //   return state;
     default:
