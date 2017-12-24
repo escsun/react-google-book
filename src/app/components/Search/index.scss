@@ -1,0 +1,19 @@
+.search {
+  text-align: center;
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search__input {
+  text-align: center;
+  width: 50%;
+  min-width: 100px;
+  height: 24px;
+  border: 1px solid #c9c9c9;
+  font-size: 15px;
+
+  &:focus {
+    outline-color: orange;
+  }
+}
