@@ -1,4 +1,4 @@
-._book {
+.book {
   margin: 0.5rem auto;
   background-color: #fff;
   border: 1px solid #efefef;
@@ -8,32 +8,32 @@
     border: 1px solid #767676;
   }
 
-  > .container-book {
+  > .book-wrapper {
     position: relative;
     padding: 1rem;
     display: flex;
     flex-flow: column nowrap;
     height: calc(100% - 2rem);
-    > .title {
+    > .book-wrapper__title {
       text-align: center;
       margin: 0;
       word-wrap: break-word;
     }
-    > .subtitle {
+    > .book-wrapper__subtitle {
       text-align: center;
     }
-    > .description {
+    > .book-wrapper__description {
       text-align: justify;
     }
-    > .image {
+    > .book-wrapper__image {
       display: block;
       width: auto;
       height: auto;
       align-self: center;
       min-height: 1vh;
-      margin: 1rem auto;
+      margin: 0 auto;
     }
-    > .link {
+    > .book-wrapper__link {
       text-decoration: none;
       display: block;
       padding: 10px;
@@ -53,21 +53,21 @@
 }
 
 @media screen and (min-width: 576px) {
-  ._book {
+  .book {
     flex: 0 1 100%;
     max-width: 100%;
   }
 }
 
 @media screen and (min-width: 768px) {
-  ._book {
+  .book {
     flex: 0 1 calc(50% - 1rem);
     max-width: calc(50% - 1rem)
   }
 }
 
 @media screen and (min-width: 992px) {
-  ._book {
+  .book {
     flex: 0 1 calc(33.3% - 1rem);
     max-width: calc(33.3% - 1rem);
   }
