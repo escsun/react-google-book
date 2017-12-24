@@ -1,4 +1,4 @@
-._loader {
+.loader {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,7 +24,7 @@
     left: 50%;
     width: 100%;
     height: 100%;
-    animation: _loader 0.6s linear;
+    animation: loader 0.6s linear;
     animation-iteration-count: infinite;
     border-radius: 500rem;
     border: 0.2em solid transparent;
@@ -40,7 +40,7 @@
   }
 }
 
-@-webkit-keyframes _loader {
+@-webkit-keyframes loader {
   from {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -52,7 +52,7 @@
   }
 }
 
-@keyframes _loader {
+@keyframes loader {
   from {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
