@@ -1,81 +1,59 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
-  RouteComponentProps,
-  withRouter
+  withRouter,
+  RouteComponentProps
 } from "react-router-dom";
 import {
   bindActionCreators,
   Dispatch
 } from "redux";
-import Loader from "../../common/Loader";
-import Book from "../../components/Book";
-
-import BookModel from "../../core/models/book.model";
+import { googleBookRetrieve } from "../../core/actions";
 import { RootState } from "../../core/reducers";
-import {
-  googleBooksRetrieve,
-  googleBooksRetrieveClean
-} from "../../core/actions";
-import {
-  getBookById,
-  getErrorBookLoading,
-} from "../../core/selectors";
+import { BookQuery } from "../../core/reducers/book";
 
-interface StateProps {
-  book: BookModel;
-  errorBookLoading: string;
+import Error from "../../common/Error/index";
+import Book from "../../components/Book/index";
+
+import IBook from "../../core/models/book.model";
+
+interface IStateProps {
+  book: IBook;
+  error: string;
 }
 
-interface DispatchProps {
+interface IDispatchProps {
   actions: {
-    googleBooksRetrieve: typeof googleBooksRetrieve;
-    googleBooksRetrieveClean: typeof googleBooksRetrieveClean;
+    googleBookRetrieve: typeof googleBookRetrieve;
   };
 }
 
-interface RouteProps {
+interface IRouteProps {
   volumeId: string;
 }
 
-class BookPage extends React.PureComponent<StateProps & DispatchProps & RouteComponentProps<RouteProps>, {}> {
+class BookPage extends React.Component<IStateProps & IDispatchProps & RouteComponentProps<IRouteProps>, {}> {
 
   componentDidMount() {
-    const {volumeId} = this.props.match.params;
-    this.props.actions.googleBooksRetrieve(volumeId);
-  }
-
-  componentWillUnmount() {
-    this.props.actions.googleBooksRetrieveClean();
-  }
-
-  renderBook() {
-    return <Book book={this.props.book} fullVersion={true} />;
-  }
-
-  renderErrorLoading() {
-    return (
-      <div>{this.props.errorBookLoading}</div>
-    );
+    this.props.actions.googleBookRetrieve(this.props.match.params.volumeId);
   }
 
   render() {
-    if (!this.props.book && !this.props.errorBookLoading) {
-      return <Loader/>;
-    }
-    return this.props.book ? this.renderBook() : this.renderErrorLoading();
+    return this.props.error
+      ? <Error error={this.props.error}/>
+      : <Book book={this.props.book} fullVersion={true}/>;
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
+const mapStateToProps = (state: RootState): IStateProps => {
   return {
-    book: getBookById(state),
-    errorBookLoading: getErrorBookLoading(state)
+    book: BookQuery.getBook(state),
+    error: BookQuery.getBookError(state)
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
-  actions: bindActionCreators({googleBooksRetrieve, googleBooksRetrieveClean}, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch<any>): IDispatchProps => ({
+  actions: bindActionCreators({googleBookRetrieve}, dispatch)
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookPage));
