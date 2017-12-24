@@ -6,8 +6,8 @@ import "./index.scss";
 
 const Home = (): JSX.Element => {
   return (
-    <div className="_home">
-      <div className="container">
+    <div className="home">
+      <div className="home__container">
         <BooksPage/>
       </div>
     </div>
