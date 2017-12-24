@@ -1,0 +1,12 @@
+.app {
+  > .app__title {
+    background-color: orange;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  > .content {
+  }
+}
