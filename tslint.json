@@ -9,7 +9,7 @@
     "jsx-wrap-multiline": true,
     "object-literal-sort-keys": false,
     "no-submodule-imports": false,
-    "interface-name": false,
+    "interface-name": true,
     "member-access": false,
     "no-empty": false,
     "no-var-requires": false,
@@ -21,7 +21,8 @@
     "object-literal-shorthand": false,
     "no-shadowed-variable": false,
     "ignore-bound-class-methods": false,
-    "jsx-no-multiline-js": false
+    "jsx-no-multiline-js": false,
+    "no-namespace": ["allow-declarations", true]
   },
   "rulesDirectory": []
 }
