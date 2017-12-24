@@ -5,8 +5,8 @@ import axios, {
 
 import { ApiEndpointUrl } from "../constants";
 
-export const fetchGoogleBooksByQuery = (bookTitle: string) => {
-  return axios.get(ApiEndpointUrl.GOOGLE_BOOKS_BY_QUERY + bookTitle)
+export const fetchGoogleBookRetrieve = (volumeId: string) => {
+  return axios.get(`${ApiEndpointUrl.GOOGLE_BOOKS_RETRIEVE}/${volumeId}`)
     .then((response: AxiosResponse) => response.data)
     .catch((error: AxiosError) => {
       throw error.response.data.error.message;

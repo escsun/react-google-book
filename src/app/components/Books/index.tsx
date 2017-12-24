@@ -2,27 +2,23 @@ import * as React from "react";
 
 import "./index.scss";
 
+import Loader from "../../common/Loader";
+
 import IBook from "../../core/models/book.model";
 import IBooks from "../../core/models/books.model";
 
 import Book from "../Book";
 
-interface Props {
+interface IProps {
   books: IBooks;
 }
 
-const Books = (props: Props): JSX.Element => {
-  const {books} = props;
+const Books = (props: IProps): JSX.Element => {
   return (
-    <div className="_books">
-      {
-        books &&
-        books.totalItems > 0
-          ? books.items.length > 0 && books.items.map((book: IBook) => <Book book={book} key={book.id}/>)
-          : <p>books not found</p>
-      }
+    <div className="books">
+      {props.books.items.map((book: IBook) => <Book book={book} key={book.id}/>)}
     </div>
   );
 };
 
-export default Books;
+export default Loader("books")(Books);

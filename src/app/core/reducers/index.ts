@@ -1,13 +1,26 @@
-import { routerReducer, RouterState } from "react-router-redux";
+import {
+  routerReducer,
+  RouterState
+} from "react-router-redux";
 import { combineReducers } from "redux";
-import * as fromBooks from "./books";
+import {
+  bookReducer,
+  IBookState
+} from "./book";
+import {
+  booksReducer,
+  IBooksState
+} from "./books";
 
+// tslint:disable-next-line
 export interface RootState {
   router: RouterState;
-  books: fromBooks.BooksState;
+  books: IBooksState;
+  book: IBookState;
 }
 
 export default combineReducers<RootState>({
   router: routerReducer,
-  books: fromBooks.booksReducer
+  books: booksReducer,
+  book: bookReducer
 });

@@ -1,3 +1,4 @@
+import { History } from "history";
 import {
   applyMiddleware,
   createStore
@@ -6,26 +7,23 @@ import { routerMiddleware as createRouterMiddleware } from "react-router-redux";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { IHotModule } from "./models/hot-module.model";
+import IHotModule from "./models/hot-module.model";
 import rootReducer from "./reducers";
 import rootSaga from "./sagas";
 
 declare const module: IHotModule;
 
-const configureStore = (history, initialState = {}) => {
+const configureStore = (history: History) => {
 
   const routerMiddleware = createRouterMiddleware(history);
   const sagaMiddleware = createSagaMiddleware();
 
-  const middlewares = [
-    routerMiddleware,
-    sagaMiddleware
-  ];
-
   const store = createStore(
     rootReducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(...middlewares))
+    composeWithDevTools(applyMiddleware(
+      routerMiddleware,
+      sagaMiddleware
+    ))
   );
 
   sagaMiddleware.run(rootSaga);
