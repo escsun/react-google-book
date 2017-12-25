@@ -1,6 +1,6 @@
 # React Google Book:
 * This is an application for use Google Book API
-* In this project uses react, redux, typescript, axios and sagas 
+* In this project uses react, typescript, redux, redux-persist, redux-saga and axios
 
 ![Screenshot](https://github.com/escsun/react-google-book/blob/master/react-google.png)
 
