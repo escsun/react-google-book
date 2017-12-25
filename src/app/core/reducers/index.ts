@@ -3,14 +3,10 @@ import {
   RouterState
 } from "react-router-redux";
 import { combineReducers } from "redux";
-import {
-  bookReducer,
-  IBookState
-} from "./book";
-import {
-  booksReducer,
-  IBooksState
-} from "./books";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/es/storage";
+import { bookReducer, IBookState } from "./book";
+import { booksReducer, IBooksState } from "./books";
 
 // tslint:disable-next-line
 export interface RootState {
@@ -19,8 +15,13 @@ export interface RootState {
   book: IBookState;
 }
 
+const booksPersistConfig = {
+  key: "books",
+  storage: storage
+};
+
 export default combineReducers<RootState>({
   router: routerReducer,
-  books: booksReducer,
+  books: persistReducer(booksPersistConfig, booksReducer),
   book: bookReducer
 });

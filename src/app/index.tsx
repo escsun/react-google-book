@@ -5,6 +5,7 @@ import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
+import { PersistGate } from "redux-persist/es/integration/react";
 import createHistory from "history/createBrowserHistory";
 import configureStore from "./core/store";
 
@@ -15,15 +16,17 @@ import "./index.scss";
 import App from "./components/App";
 
 const history = createHistory();
-const store = configureStore(history);
+const {store, persistor} = configureStore(history);
 
 const render = (Component: React.ComponentType) => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Component/>
-        </ConnectedRouter>
+        <PersistGate persistor={persistor}>
+          <ConnectedRouter history={history}>
+            <Component/>
+          </ConnectedRouter>
+        </PersistGate>
       </Provider>
     </AppContainer>,
     document.getElementById("root") as HTMLElement
