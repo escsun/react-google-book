@@ -4,7 +4,7 @@
 
 ![Screenshot](https://github.com/escsun/react-google-book/blob/master/react-google.png)
 
-## Deployed to heroku
+## Deployed on heroku
 ### https://react-google-book.herokuapp.com/
 
 ## Installation
