@@ -30,7 +30,7 @@ const configureStore = (history: History, initialState = {}) => {
     ))
   );
 
-  const persistor = persistStore(store);
+  const persistor = persistStore(store, null, () => store.getState());
   // Run Saga
   sagaMiddleware.run(rootSaga);
 
