@@ -33,7 +33,6 @@ export function* watchLatestGoogleBooksByQuerySagaInput() {
 
 export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
   try {
-    console.log("fetchGoogleBooksByQuerySaga", action.payload);
     const query = action.payload["query"];
     const page = action.payload["page"] || 1;
     const search = yield call(fetchGoogleBooksByQuery, query , page);
