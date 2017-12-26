@@ -19,8 +19,8 @@ const initialState: IBooksState = {
   items: [],
   error: null,
   totalItems: 0,
-  perPage: 0,
-  route: {query: "", page: 1}
+  perPage: 40, // TODO add dynamic perPage
+  route: null
 };
 
 export namespace BooksQuery {
@@ -38,12 +38,10 @@ export namespace BooksQuery {
 
 export const booksReducer: Reducer<IBooksState> = (state = initialState, action: BooksAction) => {
   switch (action.type) {
-    // TODO add dynamic perPage
     case BooksConstants.GOOGLE_BOOKS_QUERY:
-      return {...state, items: null, error: null, route: action.payload, perPage: 40};
-    // TODO add dynamic perPage
+      return {...state, items: [], error: null, route: action.payload, totalItems: 0};
     case BooksConstants.GOOGLE_BOOKS_QUERY_INPUT:
-      return {...state, items: null, error: null, perPage: 40};
+      return {...state, items: [], error: null, totalItems: 0, route: null};
     case BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE:
       return {...state, items: action.payload.items, totalItems: action.payload.totalItems};
     case BooksConstants.GOOGLE_BOOKS_QUERY_ERROR:
