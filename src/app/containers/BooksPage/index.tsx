@@ -1,26 +1,53 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import {
+  bindActionCreators,
+  Dispatch
+} from "redux";
+import { googleBooksByQuery } from "../../core/actions";
 import { RootState } from "../../core/reducers";
 import { BooksQuery } from "../../core/reducers/books";
 
 import Books from "../../components/Books";
 import Error from "../../common/Error";
 
-import IBooks from "../../core/models/books.model";
+import IBook from "../../core/models/book.model";
 
 interface IStateProps {
-  books: IBooks;
+  books: IBook[];
   error: string;
+  totalItems: number;
+}
+
+interface IRouteProps {
+  query: string;
+  page: string;
+}
+
+interface IDispatchProps {
+  actions: {
+    googleBooksByQuery: typeof googleBooksByQuery;
+  };
 }
 
 enum ErrorBooksMessage {
   BooksNotFound = "Books not found",
 }
 
-class BooksPage extends React.Component<IStateProps, any> {
+class BooksPage extends React.Component<IStateProps & IDispatchProps & RouteComponentProps<IRouteProps>, any> {
+
+  componentDidMount() {
+    const {query, page} = this.props.match.params;
+    console.log(query, page);
+    // if (query) {
+    //  this.props.actions.googleBooksByQuery(query);
+    // }
+    // console.log(query, page);
+  }
 
   render() {
-    if (this.props.books && this.props.books.totalItems === 0 && !this.props.books.items) {
+    if (this.props.books && this.props.totalItems === 0) {
       return <Error error={ErrorBooksMessage.BooksNotFound}/>;
     }
     return this.props.error
@@ -31,7 +58,12 @@ class BooksPage extends React.Component<IStateProps, any> {
 
 const mapStateToProps = (state: RootState): IStateProps => ({
   books: BooksQuery.getBooks(state),
-  error: BooksQuery.getBooksError(state)
+  error: BooksQuery.getBooksError(state),
+  totalItems: BooksQuery.getBooksTotalItems(state)
 });
 
-export default connect(mapStateToProps)(BooksPage);
+const mapDispatchToProps = (dispatch: Dispatch<any>): IDispatchProps => ({
+  actions: bindActionCreators({googleBooksByQuery}, dispatch)
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BooksPage));
