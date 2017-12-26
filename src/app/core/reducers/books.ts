@@ -32,6 +32,7 @@ export namespace BooksQuery {
     getBooksPerPage,
     (items, perPage) => Math.floor(items / perPage)
   );
+  export const getBooksQuery = (state: RootState) => state.books.query;
 }
 
 export const booksReducer: Reducer<IBooksState> = (state = initialState, action: BooksAction) => {
