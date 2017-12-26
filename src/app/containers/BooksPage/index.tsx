@@ -1,6 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import {
+  withRouter,
+  RouteComponentProps
+} from "react-router-dom";
 import {
   bindActionCreators,
   Dispatch
@@ -9,6 +12,7 @@ import { googleBooksByQuery } from "../../core/actions";
 import { RootState } from "../../core/reducers";
 import { BooksQuery } from "../../core/reducers/books";
 
+import PaginationPage from "../../containers/PaginationPage";
 import Books from "../../components/Books";
 import Error from "../../common/Error";
 
@@ -22,7 +26,7 @@ interface IStateProps {
 
 interface IRouteProps {
   query: string;
-  page: string;
+  page: number;
 }
 
 interface IDispatchProps {
@@ -35,24 +39,39 @@ enum ErrorBooksMessage {
   BooksNotFound = "Books not found",
 }
 
-class BooksPage extends React.Component<IStateProps & IDispatchProps & RouteComponentProps<IRouteProps>, any> {
+class BooksPage extends React.PureComponent<IStateProps & IDispatchProps & RouteComponentProps<IRouteProps>, any> {
 
   componentDidMount() {
     const {query, page} = this.props.match.params;
-    console.log(query, page);
-    // if (query) {
-    //  this.props.actions.googleBooksByQuery(query);
-    // }
-    // console.log(query, page);
+    return query && this.props.actions.googleBooksByQuery({query: query, page: page});
+  }
+
+  componentDidUpdate(prevProps) {
+    const currentLocationPath = this.props.location.pathname;
+    const prevLocationPath = prevProps.location.pathname;
+
+    if (currentLocationPath !== prevLocationPath) {
+      const {query, page} = this.props.match.params;
+      this.props.actions.googleBooksByQuery({query: query, page: page});
+      this.render();
+    }
   }
 
   render() {
-    if (this.props.books && this.props.totalItems === 0) {
+    console.log(this.props);
+    if (!this.props.books && this.props.totalItems === 0) {
       return <Error error={ErrorBooksMessage.BooksNotFound}/>;
     }
-    return this.props.error
-      ? <Error error={this.props.error}/>
-      : <Books books={this.props.books}/>;
+    if (!this.props.match.params.query && !this.props.books) {
+      return "";
+    }
+    return (
+      <div>
+        <PaginationPage />
+        <Books books={this.props.books}/>
+      </div>
+    );
+
   }
 }
 
