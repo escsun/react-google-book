@@ -15,7 +15,7 @@ import { fetchGoogleBooksByQuery } from "../api";
 
 import { BooksConstants } from "../constants";
 
-export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
+export function* fetchGoogleBooksByQuerySagaInput(action: BooksAction) {
   try {
     yield call(delay, 500);
     yield put(push("/books/" + action.payload));
@@ -26,13 +26,29 @@ export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
   }
 }
 
-export function* watchLatestGoogleBooksByQuerySaga() {
-  yield takeLatest(BooksConstants.GOOGLE_BOOKS_QUERY, fetchGoogleBooksByQuerySaga);
+export function* watchLatestGoogleBooksByQuerySagaInput() {
+  yield takeLatest(BooksConstants.GOOGLE_BOOKS_QUERY_INPUT, fetchGoogleBooksByQuerySagaInput);
+}
+
+export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
+  try {
+    const search = yield call(fetchGoogleBooksByQuery, action.payload);
+    yield put(googleBooksByQueryComplete(search));
+  } catch (error) {
+    yield put(googleBooksByQueryError(error));
+  }
+}
+
+export function* watchGoogleBooksByQuerySagaInput() {
+  while (true) {
+    const search = yield take(BooksConstants.GOOGLE_BOOKS_QUERY_INPUT);
+    yield call(watchLatestGoogleBooksByQuerySagaInput, search);
+  }
 }
 
 export function* watchGoogleBooksByQuerySaga() {
   while (true) {
     const search = yield take(BooksConstants.GOOGLE_BOOKS_QUERY);
-    yield call(watchLatestGoogleBooksByQuerySaga, search);
+    yield call(fetchGoogleBooksByQuerySaga, search);
   }
 }

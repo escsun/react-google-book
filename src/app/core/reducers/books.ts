@@ -37,8 +37,9 @@ export namespace BooksQuery {
 
 export const booksReducer: Reducer<IBooksState> = (state = initialState, action: BooksAction) => {
   switch (action.type) {
+    // TODO add dynamic perPage
     case BooksConstants.GOOGLE_BOOKS_QUERY:
-      // TODO add dynamic perPage
+    case BooksConstants.GOOGLE_BOOKS_QUERY_INPUT:
       return {...state, items: null, error: null, query: action.payload, perPage: 40};
     case BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE:
       return {...state, items: action.payload.items, totalItems: action.payload.totalItems};

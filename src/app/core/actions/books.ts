@@ -2,43 +2,56 @@ import { BooksConstants } from "../constants";
 
 import IBooks from "../models/books.model";
 
-interface IGoogleByBooksQuery {
+interface IGoogleBooksQuery {
   type: BooksConstants.GOOGLE_BOOKS_QUERY;
   payload: string;
 }
 
-interface IGoogleBooksByQueryComplete {
+interface IGoogleBooksQueryInput {
+  type: BooksConstants.GOOGLE_BOOKS_QUERY_INPUT;
+  payload: string;
+}
+
+interface IGoogleBooksQueryComplete {
   type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE;
   payload: IBooks;
 }
 
-interface IGoogleBooksByQueryError {
+interface IGoogleBooksQueryError {
   type: BooksConstants.GOOGLE_BOOKS_QUERY_ERROR;
   payload: string;
 }
 
-export const googleBooksByQuery = (payload: string): IGoogleByBooksQuery => {
+export const googleBooksByQuery = (payload: string): IGoogleBooksQuery => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY,
     payload: payload
   };
 };
 
-export const googleBooksByQueryComplete = (payload: IBooks): IGoogleBooksByQueryComplete => {
+export const googleBooksByQueryComplete = (payload: IBooks): IGoogleBooksQueryComplete => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE,
     payload: payload
   };
 };
 
-export const googleBooksByQueryError = (payload: string): IGoogleBooksByQueryError => {
+export const googleBooksByQueryError = (payload: string): IGoogleBooksQueryError => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY_ERROR,
     payload: payload
   };
 };
 
+export const googleBooksByQueryInput = (payload: string): IGoogleBooksQueryInput => {
+  return {
+    type: BooksConstants.GOOGLE_BOOKS_QUERY_INPUT,
+    payload: payload
+  };
+};
+
 export type BooksAction =
-  IGoogleByBooksQuery
-  | IGoogleBooksByQueryComplete
-  | IGoogleBooksByQueryError;
+  IGoogleBooksQuery
+  | IGoogleBooksQueryComplete
+  | IGoogleBooksQueryError
+  | IGoogleBooksQueryInput;
