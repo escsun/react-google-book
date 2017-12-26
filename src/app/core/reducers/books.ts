@@ -5,13 +5,14 @@ import { BooksConstants } from "../constants";
 import { RootState } from "./index";
 
 import IBook from "../models/book.model";
+import IBooksRoute from "../models/books-route.model";
 
 export interface IBooksState {
   items: IBook[];
   error: string;
   totalItems: number;
   perPage: number;
-  query: string;
+  route: IBooksRoute;
 }
 
 const initialState: IBooksState = {
@@ -19,7 +20,7 @@ const initialState: IBooksState = {
   error: null,
   totalItems: 0,
   perPage: 0,
-  query: ""
+  route: {query: "", page: 1}
 };
 
 export namespace BooksQuery {
@@ -32,15 +33,17 @@ export namespace BooksQuery {
     getBooksPerPage,
     (items, perPage) => Math.floor(items / perPage)
   );
-  export const getBooksQuery = (state: RootState) => state.books.query;
+  export const getBooksRoute = (state: RootState) => state.books.route;
 }
 
 export const booksReducer: Reducer<IBooksState> = (state = initialState, action: BooksAction) => {
   switch (action.type) {
     // TODO add dynamic perPage
     case BooksConstants.GOOGLE_BOOKS_QUERY:
+      return {...state, items: null, error: null, route: action.payload, perPage: 40};
+    // TODO add dynamic perPage
     case BooksConstants.GOOGLE_BOOKS_QUERY_INPUT:
-      return {...state, items: null, error: null, query: action.payload, perPage: 40};
+      return {...state, items: null, error: null, perPage: 40};
     case BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE:
       return {...state, items: action.payload.items, totalItems: action.payload.totalItems};
     case BooksConstants.GOOGLE_BOOKS_QUERY_ERROR:
