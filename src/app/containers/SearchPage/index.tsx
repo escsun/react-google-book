@@ -4,20 +4,20 @@ import {
   bindActionCreators,
   Dispatch
 } from "redux";
-import { googleBooksByQuery } from "../../core/actions";
+import { googleBooksByQueryInput } from "../../core/actions";
 
 import Search from "../../components/Search";
 
 interface IDispatchProps {
   actions: {
-    googleBooksByQuery: typeof googleBooksByQuery;
+    googleBooksByQueryInput: typeof googleBooksByQueryInput;
   };
 }
 
 class SearchPage extends React.PureComponent<IDispatchProps, {}> {
 
   handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.actions.googleBooksByQuery(event.target.value);
+    this.props.actions.googleBooksByQueryInput(event.target.value);
   }
 
   render() {
@@ -28,7 +28,7 @@ class SearchPage extends React.PureComponent<IDispatchProps, {}> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<any>): IDispatchProps => ({
-  actions: bindActionCreators({googleBooksByQuery}, dispatch)
+  actions: bindActionCreators({googleBooksByQueryInput}, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(SearchPage);
