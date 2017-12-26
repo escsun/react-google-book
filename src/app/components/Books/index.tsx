@@ -5,18 +5,17 @@ import "./index.scss";
 import Loader from "../../common/Loader";
 
 import IBook from "../../core/models/book.model";
-import IBooks from "../../core/models/books.model";
 
 import Book from "../Book";
 
 interface IProps {
-  books: IBooks;
+  books: IBook[];
 }
 
 const Books = (props: IProps): JSX.Element => {
   return (
     <div className="books">
-      {props.books.items.map((book: IBook) => <Book book={book} key={book.id}/>)}
+      {props.books.map((book: IBook) => <Book book={book} key={book.id}/>)}
     </div>
   );
 };
