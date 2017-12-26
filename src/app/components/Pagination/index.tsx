@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 const times = require("lodash/times");
 
 import "./index.scss";
+import IBooksRoute from "../../core/models/books-route.model";
 
 interface IProps {
   pages: number;
-  query: string;
+  route: IBooksRoute;
 }
 
 const Pagination = (props: IProps): JSX.Element => {
-  const {pages, query} = props;
   return (
     <ul className="pagination">
-      {times(pages, (i: number) => (
+      {times(props.pages, (i: number) => (
         <li className="pagination__item" key={i + 1}>
-          <Link className="pagination__link" to={`/books/${query}/${i + 1}`}>{i + 1}</Link>
+          <Link className="pagination__link" to={`/books/${props.route.query}/${i + 1}`}>{i + 1}</Link>
         </li>
       ))}
     </ul>
