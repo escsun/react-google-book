@@ -12,9 +12,9 @@ interface IStateProps {
 
 class PaginationPage extends React.Component<IStateProps> {
   render() {
-    // if (!this.props.route) {
-    //   return "";
-    // }
+    if (!this.props.route) {
+      return "";
+    }
     return (
       <nav className="pagination-page">
         <Pagination pages={this.props.pages} route={this.props.route} />
