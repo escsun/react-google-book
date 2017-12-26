@@ -4,20 +4,22 @@ import { BooksAction } from "../actions";
 import { BooksConstants } from "../constants";
 import { RootState } from "./index";
 
-import IBooks from "../models/books.model";
+import IBook from "../models/book.model";
 
 export interface IBooksState {
-  items: IBooks;
+  items: IBook[];
   error: string;
   totalItems: number;
   perPage: number;
+  query: string;
 }
 
 const initialState: IBooksState = {
-  items: { kind: null, totalItems: 0, items: []},
+  items: [],
   error: null,
   totalItems: 0,
-  perPage: 0
+  perPage: 0,
+  query: ""
 };
 
 export namespace BooksQuery {
@@ -36,9 +38,9 @@ export const booksReducer: Reducer<IBooksState> = (state = initialState, action:
   switch (action.type) {
     case BooksConstants.GOOGLE_BOOKS_QUERY:
       // TODO add dynamic perPage
-      return {...state, items: null, error: null, perPage: 40};
+      return {...state, items: null, error: null, query: action.payload, perPage: 40};
     case BooksConstants.GOOGLE_BOOKS_QUERY_COMPLETE:
-      return {...state, items: action.payload, totalItems: action.payload.totalItems};
+      return {...state, items: action.payload.items, totalItems: action.payload.totalItems};
     case BooksConstants.GOOGLE_BOOKS_QUERY_ERROR:
       return {...state, error: action.payload};
     default:
