@@ -19,10 +19,11 @@ export function* fetchGoogleBooksByQuerySagaInput(action: BooksAction) {
   try {
     yield call(delay, 500);
     yield put(push("/books/" + action.payload));
-    const search = yield call(fetchGoogleBooksByQuery, action.payload);
-    yield put(googleBooksByQueryComplete(search));
+    // const search = yield call(fetchGoogleBooksByQuery, action.payload);
+    // yield put(googleBooksByQueryComplete(search));
   } catch (error) {
-    yield put(googleBooksByQueryError(error));
+    console.error(error);
+    // yield put(googleBooksByQueryError(error));
   }
 }
 
@@ -32,7 +33,10 @@ export function* watchLatestGoogleBooksByQuerySagaInput() {
 
 export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
   try {
-    const search = yield call(fetchGoogleBooksByQuery, action.payload);
+    console.log("fetchGoogleBooksByQuerySaga", action.payload);
+    const query = action.payload["query"];
+    const page = action.payload["page"] || 1;
+    const search = yield call(fetchGoogleBooksByQuery, query , page);
     yield put(googleBooksByQueryComplete(search));
   } catch (error) {
     yield put(googleBooksByQueryError(error));
