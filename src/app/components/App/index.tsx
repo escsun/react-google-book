@@ -9,7 +9,7 @@ import "./index.scss";
 import Home from "../Home";
 import BookPage from "../../containers/BookPage";
 import BooksPage from "../../containers/BooksPage";
-import PaginationPage from "../../containers/PaginationPage";
+// import PaginationPage from "../../containers/PaginationPage";
 import SearchPage from "../../containers/SearchPage";
 
 import PageNotFound from "../PageNotFound";
@@ -19,7 +19,6 @@ const App = (): JSX.Element => {
     <div className="app">
       <h1 className="app__title">Find a book</h1>
       <SearchPage />
-      <PaginationPage/>
       <div className="content">
         <Switch>
           <Route exact={true} path="/" component={Home}/>
