@@ -1,10 +1,11 @@
 import { BooksConstants } from "../constants";
 
 import IBooks from "../models/books.model";
+import IBooksRoute from "../models/books-route.model";
 
 interface IGoogleBooksQuery {
   type: BooksConstants.GOOGLE_BOOKS_QUERY;
-  payload: string;
+  payload: IBooksRoute;
 }
 
 interface IGoogleBooksQueryInput {
@@ -22,7 +23,7 @@ interface IGoogleBooksQueryError {
   payload: string;
 }
 
-export const googleBooksByQuery = (payload: string): IGoogleBooksQuery => {
+export const googleBooksByQuery = (payload: IBooksRoute): IGoogleBooksQuery => {
   return {
     type: BooksConstants.GOOGLE_BOOKS_QUERY,
     payload: payload
