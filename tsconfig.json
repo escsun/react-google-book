@@ -20,6 +20,9 @@
     "paths": {
       "react": [
         "node_modules/@types/react"
+      ],
+      "lodash": [
+        "node_modules/@types/lodash"
       ]
     }
   }
