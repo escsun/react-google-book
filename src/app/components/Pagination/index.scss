@@ -1,0 +1,27 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
+  border-radius: .25rem;
+
+  .pagination__item {
+    .pagination__link {
+      position: relative;
+      display: block;
+      padding: .5rem .75rem;
+      margin-left: -1px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      line-height: 1.25;
+      color: orange;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}
