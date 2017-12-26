@@ -18,7 +18,7 @@ import { BooksConstants } from "../constants";
 export function* fetchGoogleBooksByQuerySaga(action: BooksAction) {
   try {
     yield call(delay, 500);
-    yield put(push("/"));
+    yield put(push("/books/" + action.payload));
     const search = yield call(fetchGoogleBooksByQuery, action.payload);
     yield put(googleBooksByQueryComplete(search));
   } catch (error) {
