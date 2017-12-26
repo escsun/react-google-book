@@ -19,11 +19,13 @@ export const fetchGoogleBooksByQuery = (bookTitle: string,
                                         maxResults: number = 40,
                                         projection: string = "full"): Promise<IBooks> => {
   // https://www.googleapis.com/books/v1/volumes?q=test&startIndex=1&&maxResults=40&projection=full
+  const startIndexByPages = +startIndex === 1 ? 1 : 1 + (startIndex * maxResults);
   const queryUrl = ApiEndpointUrl.GOOGLE_BOOKS_BY_QUERY
     + bookTitle
-    + "&startIndex=" + startIndex
+    + "&startIndex=" + startIndexByPages
     + "&maxResults=" + maxResults
     + "&projection=" + projection;
+  console.log(queryUrl);
   return axios.get(queryUrl)
     .then((response: AxiosResponse) => response.data)
     .catch((error: AxiosError) => {
